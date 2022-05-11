@@ -1,0 +1,55 @@
+.root {
+    font-weight: 400;
+}
+
+.body-1 {
+    font-size: 14px;
+
+    &-light {
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+    &-bold {
+        font-size: 14px;
+        font-weight: 700;
+    }
+}
+
+.body-2 {
+    font-size: 12px;
+
+    &-light {
+        font-size: 12px;
+        font-weight: 300;
+    }
+
+    &-bold {
+        font-size: 12px;
+        font-weight: 700;
+    }
+}
+
+.black {
+    color: #000;
+}
+
+.white {
+    color: #fff;
+}
+
+.red {
+    color: #d00c1a;
+}
+
+.gray-1 {
+    color: #151515;
+}
+
+.gray-2 {
+    color: #222;
+}
+
+.gray-3 {
+    color: #8a8a8a;
+}

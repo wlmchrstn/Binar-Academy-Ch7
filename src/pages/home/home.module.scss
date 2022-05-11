@@ -1,0 +1,55 @@
+.root {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.image {
+    background-image: url('../../assets/images/login-bg.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex: 2;
+    width: 100%;
+}
+
+.form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    padding: 55px;
+
+    h1 {
+        margin: 32px 0;
+    }
+
+    p {
+        margin-bottom: 9px;
+    }
+
+    button {
+        margin-top: 16px;
+    }
+}
+
+.input {
+    margin-bottom: 16px;
+}
+
+.logo {
+    height: 34px;
+    width: 100px;
+}
+
+.error {
+    background-color: rgba(208, 12, 26, 0.1);
+    border-radius: 5px;
+    margin-bottom: 32px;
+    padding: 12px 20px;
+
+    p {
+        margin-bottom: 0;
+    }
+}

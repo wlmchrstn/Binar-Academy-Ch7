@@ -1,0 +1,39 @@
+.root {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    display: flex;
+    padding: 10px 15px;
+
+    &:focus-within {
+        border: 1px solid #000;
+    }
+
+    input, select {
+        background-color: transparent;
+        border: 0;
+        color: #151515;
+        font-size: 12px;
+        padding: 0;
+        width: 100%;
+
+        &::placeholder {
+            color: #a5a5a5;
+            font-size: 12px;
+        }
+    }
+}
+
+.dropdown {
+    padding: 9px 12px;
+    width: auto;
+
+    input, select {
+        width: auto;
+    }
+}
