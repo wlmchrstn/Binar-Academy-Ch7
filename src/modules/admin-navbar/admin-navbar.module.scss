@@ -1,0 +1,55 @@
+.root {
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    height: 70px;
+    justify-content: space-between;
+    margin-left: 290px;
+    position: fixed;
+    width: calc(100vw - 290px);
+}
+
+.menu {
+    padding: 23px 24px;
+
+    img {
+        vertical-align: top;
+    }
+}
+
+.user {
+    display: flex;
+    flex-direction: row;
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    margin-right: 24px;
+    padding: 17px 0;
+}
+
+.profile {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+
+    &-image {
+        align-items: center;
+        background-color: #cfd4ed;
+        border-radius: 50%;
+        display: flex;
+        height: 38px;
+        justify-content: center;
+        margin-right: 8px;
+        width: 38px;
+    }
+
+    p {
+        margin-right: 8px;
+    }
+}
+
+.chevron {
+    margin-right: 24px;
+}

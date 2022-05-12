@@ -23,12 +23,12 @@ const Router = () => {
     return (
         <Routes>
             <Route element={<WithNavFoot />}>
-                <Route path={'/admin'} element={<AdminPage />} />
                 <Route path={'/customer'} element={<CustomerPage />} />
             </Route>
             <Route path={'*'} element={<Custom404 />} />
             <Route path={'/'} element={<HomePage path={'register'} />} />
             <Route path={'/login'} element={<HomePage path={'login'} />} />
+            <Route path={'/admin'} element={<AdminPage />} />
         </Routes>
     );
 };

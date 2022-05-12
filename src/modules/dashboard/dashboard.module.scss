@@ -1,0 +1,164 @@
+.root {
+    padding: 32px 25px;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 24px;
+
+    &-chevron {
+        height: 16px;
+        width: 16px;
+
+        img {
+            vertical-align: top;
+        }
+    }
+}
+
+.navigation > :not(:last-child) {
+    margin-right: 4px;
+}
+
+.header {
+    margin-bottom: 24px;
+}
+
+.title {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+
+    p {
+        margin-left: 8px;
+    }
+
+    margin-bottom: 16px;
+}
+
+.title::before {
+    background-color: #0d28a6;
+    content: "";
+    height: 24px;
+    width: 4px;
+}
+
+.list {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+
+    &-item {
+        background-color: #fff;
+        display: flex;
+        flex-direction: row;
+        padding: 0 16px;
+
+        &-wrapper {
+            display: flex;
+            flex-direction: column;
+            max-height: 450px;
+            overflow-y: scroll;
+        }
+    }
+
+    &-header {
+        background-color: #cfd4ed;
+    }
+
+    &-number {
+        align-items: center;
+        box-sizing: border-box;
+        display: flex;
+        padding: 12px 0;
+        width: 52px;
+    }
+
+    &-column {
+        column-gap: 16px;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        max-width: 1048px;
+        width: 100%;
+    }
+
+    &-car {
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    &-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 12px 0;
+    }
+}
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 16px;
+
+    &-wrapper {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.limit, .jump {
+    display: flex;
+    flex-direction: column;
+
+    p {
+        margin-bottom: 8px;
+    }
+}
+
+.jump {
+    margin-left: 24px;
+
+    &-dropdown {
+        display: flex;
+        flex-direction: row;
+
+        input {
+            margin-right: 20px;
+            width: 32px;
+        }
+    }
+}
+
+.page {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+
+    &-wrapper {
+        align-items: center;
+        background-color: #fff;
+        border: 1px solid #d0d0d0;
+        border-radius: 2px;
+        box-sizing: border-box;
+        display: flex;
+        height: 38px;
+        justify-content: center;
+        text-align: center;
+        width: 38px;
+    }
+
+    &-wrapper:hover {
+        cursor: pointer;
+    }
+
+    &-selected {
+        background-color: #cfd4ed;
+        border: 1px solid #0d28a6;
+    }
+
+    &-disabled {
+        opacity: 0.7;
+        pointer-events: none;
+    }
+}
