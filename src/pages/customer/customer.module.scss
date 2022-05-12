@@ -1,0 +1,26 @@
+.root {
+    background-color: #f1f3ff;
+    background-image: url('../../assets/images/img_car.png');
+    background-size: auto;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    height: 500px;
+    padding-top: 84px;
+    width: 100%;
+}
+
+.banner {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 93px 16px 139px;
+
+    h1 {
+        margin-bottom: 16px;
+        max-width: 568px;
+    }
+
+    p {
+        max-width: 468px;
+    }
+}

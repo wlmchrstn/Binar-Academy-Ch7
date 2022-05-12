@@ -1,0 +1,37 @@
+.root {
+    max-width: 1200px;
+    padding: 100px 16px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.address,
+.social,
+.copyright {
+    width: 268px;
+}
+
+.navigation {
+    width: 82px;
+}
+
+.address > :not(:last-child),
+.navigation > :not(:last-child),
+.social > :not(:last-child),
+.copyright > :not(:last-child) {
+    margin-bottom: 16px;
+}
+
+.link {
+    a {
+        text-decoration: none;
+    }
+}
+
+.social-group {
+    display: grid;
+    grid-template-columns: repeat(5, 32px);
+    column-gap: 16px;
+}

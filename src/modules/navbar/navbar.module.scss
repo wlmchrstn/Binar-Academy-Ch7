@@ -1,0 +1,34 @@
+.root {
+    background-color: #f1f3ff;
+    width: 100%;
+    position: fixed;
+    z-index: 3;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 24px 16px;
+    width: 100%;
+}
+
+.wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.wrapper > :not(:last-child) {
+    margin-right: 32px;
+}
+
+.button {
+    width: 81px;
+}
