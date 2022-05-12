@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './customer.module.scss';
 
 import Title from '../../components/title/title';
 import Paragraph from '../../components/paragraph/paragraph';
 
 const CustomerPage = () => {
+    const navigate = useNavigate();
+    useEffect(() => {
+        const token = sessionStorage.getItem('bcrToken');
+        const role = sessionStorage.getItem('bcrRole');
+        if (!token) return navigate('/401');
+        if (role !== 'customer') return navigate('/401');
+    });
+
     return (
         <section className={styles.root}>
             <div className={styles.banner}>

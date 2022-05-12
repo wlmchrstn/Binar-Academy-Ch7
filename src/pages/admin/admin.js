@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './admin.module.scss';
 
 // Modules
@@ -109,6 +110,14 @@ const cardList = [
 const AdminPage = () => {
     const [sideBar,setSideBar] = useState('Dashboard');
     const [dashboard,setDashboard] = useState('Order');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = sessionStorage.getItem('bcrToken');
+        const role = sessionStorage.getItem('bcrRole');
+        if (!token) return navigate('/401');
+        if (role !== 'admin') return navigate('/401');
+    });
 
     return (
         <section className={styles.root}>
