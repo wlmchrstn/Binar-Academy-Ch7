@@ -1,11 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './navbar.module.scss';
 import Paragraph from '../../components/paragraph/paragraph';
 import Button from '../../components/button/button';
 import logo from '../../assets/icons/logo.svg';
 
 const Navbar = () => {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        sessionStorage.removeItem('bcrToken');
+        sessionStorage.removeItem('bcrRole');
+        navigate('/login');
+    };
+
     return (
         <div className={styles.root}>
             <div className={styles.container}>
@@ -34,7 +42,7 @@ const Navbar = () => {
                         </Paragraph>
                     </Link>
                     <div className={styles.button}>
-                        <Button variant={'secondary'} type={'submit'}>{'Register'}</Button>
+                        <Button variant={'primary'} onClick={() => handleLogout()}>{'Logout'}</Button>
                     </div>
                 </div>
             </div>

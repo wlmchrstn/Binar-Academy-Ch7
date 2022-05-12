@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import styles from './admin-navbar.module.scss';
 
 // Components
@@ -15,9 +16,15 @@ import chevronDown from '../../assets/icons/fi_chevron-down.svg';
 
 const AdminNavbar = ({ ...props }) => {
     const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
 
     const onSubmit = (data) => {
         console.log(data);
+    };
+    const handleLogout = () => {
+        sessionStorage.removeItem('bcrToken');
+        sessionStorage.removeItem('bcrRole');
+        navigate('/login');
     };
 
     return (
@@ -49,6 +56,9 @@ const AdminNavbar = ({ ...props }) => {
                     <div className={styles.chevron}>
                         <img src={chevronDown} alt={'logo-chevron-down'} />
                     </div>
+                    <Button style={{ marginRight: '25px' }} variant={'primary'} onClick={() => handleLogout()}>
+                        {'Logout'}
+                    </Button>
                 </div>
             </div>
         </div>
