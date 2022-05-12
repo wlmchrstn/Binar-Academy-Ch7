@@ -10,9 +10,10 @@ const Router = () => {
     return (
         <Routes>
             <Route path={'*'} element={<Custom404 />} />
-            <Route path={'/'} element={<HomePage />} />
-            <Route path="/admin" element={<AdminPage />} />
-            <Route path="/customer" element={<CustomerPage />} />
+            <Route path={'/'} element={<HomePage path={'register'} />} />
+            <Route path={'/login'} element={<HomePage path={'login'} />} />
+            <Route path={'/admin'} element={<AdminPage />} />
+            <Route path={'/customer'} element={<CustomerPage />} />
         </Routes>
     );
 };
