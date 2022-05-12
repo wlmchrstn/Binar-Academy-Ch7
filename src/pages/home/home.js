@@ -34,7 +34,7 @@ const HomePage = ({ path }) => {
         setLogin(null);
         const token = sessionStorage.getItem('bcrToken');
         const role = sessionStorage.getItem('bcrRole');
-        if (token) return navigate(role === 'admin' ? '/admin' : '/customer');
+        if (token && token !== undefined && token !== 'undefined') return navigate(role === 'admin' ? '/admin' : '/customer');
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -42,8 +42,9 @@ const HomePage = ({ path }) => {
         try {
             const res = await signInWithPopup(auth, provider);
             console.log(res);
-            sessionStorage.setItem('bcrToken', res.user.access_token);
+            sessionStorage.setItem('bcrToken', res.user.accessToken);
             sessionStorage.setItem('bcrRole', 'customer');
+            console.log(res.user.accessToken);
             setLogin(true);
             alert('Berhasil Login!');
             navigate('/customer');
