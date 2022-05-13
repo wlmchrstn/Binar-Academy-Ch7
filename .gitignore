@@ -161,6 +161,10 @@ exports
 
 # testing
 /coverage
+/cypress/report
+/cypress/screenshots
+/cypress/videos
+/cypress/downloads
 
 # production
 /build
