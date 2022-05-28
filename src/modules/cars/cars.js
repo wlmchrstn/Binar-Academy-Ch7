@@ -30,7 +30,7 @@ const Cars = ({ sideBarState, data, handleRefresh, refresh }) => {
     const {
         register,
         reset,
-        formState: { errors, isSubmitSuccessful },
+        formState: { isSubmitSuccessful },
         handleSubmit,
     } = useForm({
         defaultValues: {
