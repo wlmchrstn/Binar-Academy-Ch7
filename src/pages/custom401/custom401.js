@@ -8,7 +8,7 @@ const Custom401 = () => {
             <h1>
                 {'Error 401 | Forbidden'}
             </h1>
-            <Link to={'/login'}>
+            <Link to={'/'}>
                 {'Back to home'}
             </Link>
         </div>

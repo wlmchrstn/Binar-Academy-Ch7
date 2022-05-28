@@ -92,16 +92,16 @@ const SideBar = ({ handleSideBar, sideBarState, handleContent, contentState, ...
 };
 
 SideBar.propTypes = {
-    handleSideBar: PropTypes.string.isRequired,
+    handleSideBar: PropTypes.func.isRequired,
     sideBarState: PropTypes.string.isRequired,
-    handleContent: PropTypes.string.isRequired,
+    handleContent: PropTypes.func.isRequired,
     contentState: PropTypes.string.isRequired,
 };
 
 SideBar.defaultProps = {
-    handleSideBar: 'Dashboard',
+    handleSideBar: null,
     sideBarState: 'Order',
-    handleContent: 'Dashboard',
+    handleContent: null,
     contentState: 'Order',
 };
 

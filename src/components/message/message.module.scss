@@ -5,7 +5,7 @@
     justify-content: center;
     margin-left: 275px;
     padding: 12px 16px;
-    position: absolute;
+    position: fixed;
     text-align: center;
     top: 100px;
     width: 550px;
@@ -21,4 +21,8 @@
 
 .null {
     display: none;
+}
+
+.hidden {
+    visibility: hidden;
 }

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from './cars.module.scss';
@@ -18,12 +20,27 @@ import edit from '../../assets/icons/fi_edit.svg';
 import key from '../../assets/icons/fi_key.svg';
 import clock from '../../assets/icons/fi_clock.svg';
 
-const Cars = ({ sideBarState, data }) => {
-    const [audit,setAudit] = useState(false);
-    const [filter,setFilter] = useState('All');
-    const [message,setMessage] = useState('null');
-    const [msg,setMsg] = useState(null);
-    const [showMessage,setShowMessage] = useState(false);
+const Cars = ({ sideBarState, data, handleRefresh, refresh }) => {
+    const [audit, setAudit] = useState(false);
+    const [id, setId] = useState(null);
+    const [filter, setFilter] = useState('All');
+    const [message, setMessage] = useState('null');
+    const [msg, setMsg] = useState(null);
+    const [showMessage, setShowMessage] = useState(false);
+    const {
+        register,
+        reset,
+        formState: { errors, isSubmitSuccessful },
+        handleSubmit,
+    } = useForm({
+        defaultValues: {
+            name: '',
+            category: '',
+            price: '',
+            status: null,
+            image: null,
+        }
+    });
 
     useEffect(() => {
         const timeId = setTimeout(() => {
@@ -35,6 +52,18 @@ const Cars = ({ sideBarState, data }) => {
             clearTimeout(timeId)
         }
     }, [showMessage]);
+
+    useEffect(() => {
+        if (isSubmitSuccessful) {
+            reset({
+                name: '',
+                category: '',
+                price: '',
+                status: null,
+                image: null,
+            });
+        }
+    }, [isSubmitSuccessful, reset]);
 
     const FilterCTA = ({ state }) => (
         <div onClick={() => setFilter(state)} className={classNames(styles['filter-wrapper'], filter === state ? styles['filter-selected'] : '')}>
@@ -49,28 +78,72 @@ const Cars = ({ sideBarState, data }) => {
         return filtered.map((item, index) => (<Card key={index} data={item} />));
     };
 
-    const handleDelete = () => {
-        setMessage('deleted');
-        setMsg('Data Berhasil Dihapus');
-        setShowMessage(true);
+    const handleDelete = async (e, params) => {
+        e.preventDefault();
+        try {
+            const { data: response } = await axios.delete(`${process.env.REACT_APP_BASE_URL}/admin/car/${params}`, {
+                headers: { "Access-Control-Allow-Origin": "*" }
+            });
+            console.log(response, 'API Response');
+            setMessage('deleted');
+            setMsg('Data Berhasil Dihapus');
+            setShowMessage(true);
+        } catch(err) {
+
+        };
+        handleRefresh(!refresh);
     };
 
-    const handleAudit = () => {
-        setMessage('success');
-        setMsg('Data Berhasil Disimpan');
-        setShowMessage(true);
+    const handleUpdate = (params) => {
+        setAudit(true);
+        setId(params);
+    };
+
+    const handleCancel = () => {
         setAudit(false);
+        setId(null);
+    };
+
+    const handleAudit = async (data) => {
+        const { name, category, price, status, image } = data;
+        const req = new FormData();
+        req.append('name', name);
+        req.append('category', category);
+        req.append('price', price);
+        req.append('status', status);
+        if (image.length > 0) req.append('image', image[0]);
+
+        try {
+            if (id) {
+                const { data: response } = await axios.put(`${process.env.REACT_APP_BASE_URL}/admin/car/${id}`, req, {
+                    headers: { "Access-Control-Allow-Origin": "*" }
+                });
+                console.log(response, 'API response');
+                setId(null);
+            } else {
+                const { data: response } = await axios.post(`${process.env.REACT_APP_BASE_URL}/admin/car`, req, {
+                    headers: { "Access-Control-Allow-Origin": "*" }
+                });
+                console.log(response, 'API response');
+            }
+            setMessage('success');
+            setMsg('Data Berhasil Disimpan');
+            setShowMessage(true);
+            setAudit(false);
+        } catch (err) {
+            console.log(err, 'handleAudit Error')
+        };
     };
 
     const Card = ({ data }) => {
         return (
             <div className={styles['card-wrapper']}>
                 <div className={styles['card-image']}>
-                    <img src={data.src} alt={data.label} />
+                    <img src={data.image} alt={data.name} />
                 </div>
                 <div className={styles['card-label']}>
                     <Paragraph variant={'body-1'} color={'black'}>
-                        {`${data.label}/${data.type}`}
+                        {`${data.name}/${data.category}`}
                     </Paragraph>
                 </div>
                 <div className={styles['card-price']}>
@@ -81,20 +154,20 @@ const Cars = ({ sideBarState, data }) => {
                 <div className={styles['card-rent']}>
                     <img src={key} alt={'logo-key'} />
                     <Paragraph variant={'body-1-light'}>
-                        {`${data.startRent} - ${data.finishRent}`}
+                        {`${data.start_rent_at} - ${data.finish_rent_at}`}
                     </Paragraph>
                 </div>
                 <div className={styles['card-update']}>
                     <img src={clock} alt={'logo-clock'} />
                     <Paragraph variant={'body-1-light'}>
-                        {`Updated at ${data.update}`}
+                        {`Updated at ${data.updatedAt}`}
                     </Paragraph>
                 </div>
                 <div className={styles['card-cta']}>
-                    <Button onClick={() => handleDelete()} type={'button'} variant={'secondary-outlined'} color={'red'} withIcon={trash} withIconLabel={'logo-trash'}>
+                    <Button onClick={(e) => handleDelete(e, data.id)} type={'button'} variant={'secondary-outlined'} color={'red'} withIcon={trash} withIconLabel={'logo-trash'}>
                         {'Delete'}
                     </Button>
-                    <Button onClick={() => setAudit(true)} type={'button'}  variant={'secondary'} color={'white'} withIcon={edit} withIconLabel={'logo-edit'}>
+                    <Button onClick={() => handleUpdate(data.id)} type={'button'} variant={'secondary'} color={'white'} withIcon={edit} withIconLabel={'logo-edit'}>
                         {'Edit'}
                     </Button>
                 </div>
@@ -104,42 +177,64 @@ const Cars = ({ sideBarState, data }) => {
 
     const Audit = () => {
         return (
-            <div className={styles.audit}>
+            <form className={styles.audit} onSubmit={handleSubmit(handleAudit)}>
                 <div className={styles['audit-form']}>
                     <div className={styles['audit-wrapper']}>
                         <div className={styles['audit-label']}>
                             <Paragraph variant={'body-2-light'} color={'black'}>
-                                {'Nama'}
+                                {'Name'}
                             </Paragraph>
                         </div>
                         <Input className={styles['audit-input']}>
                             <input
                                 type={'text'}
-                                placeholder={1} />
+                                {...register('name', { required: true })} />
                         </Input>
                     </div>
                     <div className={styles['audit-wrapper']}>
                         <div className={styles['audit-label']}>
                             <Paragraph variant={'body-2-light'} color={'black'}>
-                                {'Harga'}
+                                {'Category'}
                             </Paragraph>
                         </div>
                         <Input className={styles['audit-input']}>
                             <input
                                 type={'text'}
-                                placeholder={1} />
+                                {...register('category', { required: true })} />
                         </Input>
                     </div>
                     <div className={styles['audit-wrapper']}>
                         <div className={styles['audit-label']}>
                             <Paragraph variant={'body-2-light'} color={'black'}>
-                                {'Foto'}
+                                {'Price'}
+                            </Paragraph>
+                        </div>
+                        <Input className={styles['audit-input']}>
+                            <input
+                                type={'number'}
+                                {...register('price', { required: true })} />
+                        </Input>
+                    </div>
+                    <div className={styles['audit-wrapper']}>
+                        <div className={styles['audit-label']}>
+                            <Paragraph variant={'body-2-light'} color={'black'}>
+                                {'Status'}
+                            </Paragraph>
+                        </div>
+                        <input
+                            type={'checkbox'}
+                            {...register('status')} />
+                    </div>
+                    <div className={styles['audit-wrapper']}>
+                        <div className={styles['audit-label']}>
+                            <Paragraph variant={'body-2-light'} color={'black'}>
+                                {'Image'}
                             </Paragraph>
                         </div>
                         <Input className={styles['audit-input']}>
                             <input
                                 type={'file'}
-                                placeholder={1} />
+                                {...register('image')} />
                         </Input>
                     </div>
                     <div className={styles['audit-wrapper']}>
@@ -192,24 +287,24 @@ const Cars = ({ sideBarState, data }) => {
                     </div>
                 </div>
                 <div className={styles['audit-cta']}>
-                    <Button onClick={() => setAudit(false)} type={'button'} variant={'primary-outlined'}>
+                    <Button onClick={() => handleCancel()} type={'button'} variant={'primary-outlined'}>
                         {'Cancel'}
                     </Button>
-                    <Button onClick={() => handleAudit()} type={'button'} variant={'primary'}>
+                    <Button type={'submit'} variant={'primary'}>
                         {'Save'}
                     </Button>
                 </div>
-            </div>
+            </form>
         );
     };
 
     return (
         <div className={styles.root}>
             {showMessage ? (
-                    <Message variant={message}>
-                        {msg}
-                    </Message>
-                ) : null
+                <Message variant={message}>
+                    {msg}
+                </Message>
+            ) : null
             }
             <div className={styles.navigation}>
                 <Paragraph variant={'body-2-bold'} color={'black'}>

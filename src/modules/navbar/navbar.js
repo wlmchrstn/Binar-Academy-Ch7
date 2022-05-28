@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './navbar.module.scss';
 import Paragraph from '../../components/paragraph/paragraph';
@@ -6,7 +6,12 @@ import Button from '../../components/button/button';
 import logo from '../../assets/icons/logo.svg';
 
 const Navbar = () => {
+    const [login,setLogin] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (sessionStorage.getItem('bcrToken') !== null || undefined) setLogin(true);
+    }, []);
 
     const handleLogout = () => {
         sessionStorage.removeItem('bcrToken');
@@ -21,28 +26,36 @@ const Navbar = () => {
                     <img src={logo} alt={'logo'} />
                 </div>
                 <div className={styles.wrapper}>
-                    <Link to={'/services'}>
+                    <Link to={'#services'}>
                         <Paragraph variant={'body-1'} color={'black'}>
                             {'Our Services'}
                         </Paragraph>
                     </Link>
-                    <Link to={'/why-us'}>
+                    <Link to={'#why-us'}>
                         <Paragraph variant={'body-1'} color={'black'}>
                             {'Why Us'}
                         </Paragraph>
                     </Link>
-                    <Link to={'/testimonial'}>
+                    <Link to={'#testimonial'}>
                         <Paragraph variant={'body-1'} color={'black'}>
                             {'Testimonial'}
                         </Paragraph>
                     </Link>
-                    <Link to={'/faq'}>
+                    <Link to={'#faq'}>
                         <Paragraph variant={'body-1'} color={'black'}>
                             {'FAQ'}
                         </Paragraph>
                     </Link>
                     <div className={styles.button}>
-                        <Button variant={'primary'} onClick={() => handleLogout()}>{'Logout'}</Button>
+                        {login ? (
+                            <Button variant={'primary'} onClick={() => handleLogout()}>
+                                {'Logout'}
+                            </Button>
+                        ) : (
+                            <Button variant={'secondary'} onClick={() => navigate('/register')}>
+                                {'Register'}
+                            </Button>
+                        )}
                     </div>
                 </div>
             </div>

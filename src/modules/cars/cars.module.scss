@@ -82,8 +82,9 @@
     }
 
     &-image {
-        box-sizing: 'border-box';
+        box-sizing: border-box;
         padding: 31px 16px;
+        margin-bottom: auto;
 
         img {
             width: 100%;

@@ -1,0 +1,51 @@
+.root {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    max-width: 333px;
+    padding: 24px;
+}
+
+.image {
+    position: relative;
+    box-sizing: border-box;
+    height: 190px;
+    margin-bottom: 16px;
+    padding: 16px;
+    width: 285px;
+    display: flex;
+
+    img {
+        align-self: center;
+        width: 100%;
+    }
+}
+
+.wrapper {
+    margin-bottom: 16px;
+}
+
+.wrapper > :not(:last-child) {
+    margin-bottom: 8px;
+}
+
+.detail-wrapper {
+    margin-bottom: 24px;
+}
+
+.detail-wrapper > :not(:last-child) {
+    margin-bottom: 16px;
+}
+
+.detail {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+
+    img {
+        margin-right: 8px;
+    }
+}
