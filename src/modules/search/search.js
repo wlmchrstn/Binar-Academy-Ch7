@@ -17,7 +17,7 @@ import Button from '../../components/button/button';
 import Paragraph from '../../components/paragraph/paragraph';
 import Card from '../../components/card/card';
 import Title from '../../components/title/title';
-import Modal from '../../components/custom-modal/custom-modal';
+// import Modal from '../../components/custom-modal/custom-modal';
 
 // Assets
 import users from '../../assets/icons/fi_users.svg';
