@@ -181,7 +181,8 @@ const Search = ({ setHero }) => {
                     </div>
                     <div className={styles.card}>
                         <div className={styles['card-image']}>
-                            <Modal image={params.image} label={params.name} />
+                            <img src={params.image} alt={params.name} />
+                            {/* <Modal image={params.image} label={params.name} /> */}
                         </div>
                         <div style={{ marginBottom: '8px', marginTop: '24px' }}>
                             <Paragraph variant={'body-1'} weight={'bold'} color={'black'}>
