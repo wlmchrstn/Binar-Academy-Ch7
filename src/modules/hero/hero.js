@@ -12,6 +12,9 @@ const Hero = () => {
     return (
         <section className={styles.root}>
             <div className={styles.banner}>
+            <Title tagElement={'h1'} variant={'banner'} color={'black'}>
+                    {'Staging Rental'}
+                </Title>
                 <Title tagElement={'h1'} variant={'banner'} color={'black'}>
                     {'Sewa & Rental Mobil Terbaik di kawasan (Lokasimu)'}
                 </Title>
