@@ -97,6 +97,7 @@ const Cars = ({ sideBarState, data, handleRefresh, refresh }) => {
     const handleUpdate = (params) => {
         setAudit(true);
         setId(params);
+        handleRefresh(!refresh);
     };
 
     const handleCancel = () => {
@@ -130,6 +131,7 @@ const Cars = ({ sideBarState, data, handleRefresh, refresh }) => {
             setMsg('Data Berhasil Disimpan');
             setShowMessage(true);
             setAudit(false);
+            handleRefresh(!refresh);
         } catch (err) {
             console.log(err, 'handleAudit Error')
         };
