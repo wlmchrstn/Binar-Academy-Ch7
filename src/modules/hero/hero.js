@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './hero.module.scss';
 
@@ -12,7 +12,7 @@ const Hero = () => {
     return (
         <section className={styles.root}>
             <div className={styles.banner}>
-            <Title tagElement={'h1'} variant={'banner'} color={'black'}>
+                <Title tagElement={'h1'} variant={'banner'} color={'black'}>
                     {'Staging Rental'}
                 </Title>
                 <Title tagElement={'h1'} variant={'banner'} color={'black'}>
